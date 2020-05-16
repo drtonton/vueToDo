@@ -1,22 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<body>
-  <div id="app">
-    {{ message }}
-  </div>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        message: 'Hello Vue!'
-      }
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <div>To do, or not to do (with Vue)</div>
+  </head>
+  <body>
+    <!-- below are examples of vue components hard-coded. Not the cool reusable ones (not even sure if they qualify as "components") -->
+    <!-- the id here poitns to 'el: '#app' below in the JS' -->
+    <div id="app">
+      {{ message }}
+    </div>
+    <!-- here, we use a directive, a vue-specific html attribute, v-bind:title
+    With it, we're binding the message of app2 to the title of that element -->
+    <div id="app2" v-bind:title="message">
+      hover over me
+    </div>
+    <!-- conditionals and user input -->
+    <div id="app3">
+      <button v-on:click="toggleInvisibility">toggle visibility</button>
+      <span v-if="visible">I am visible</span>
+    </div>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!'
+        }
+      });
+      var app2 = new Vue({
+        el: '#app2',
+        data: {
+          message: 'this message was bound to this div via the v-bind:title directive. Here\'s a date: ' + new Date().toLocaleString()
+        }
+      });
+      var app3 = new Vue ({
+        el: '#app3',
+        data: {
+          visible: true
+        },
+        methods: {
+          toggleInvisibility: function () {
+            this.visible = !this.visible;
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
